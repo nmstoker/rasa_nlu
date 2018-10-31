@@ -15,13 +15,14 @@ function download_package {
     case $1 in
         mitie)
             echo "Downloading mitie model..."
-            python -m rasa_nlu.download -p mitie
+            wget https://github.com/mit-nlp/MITIE/releases/download/v0.4/MITIE-models-v0.2.tar.bz2
+            tar jxf MITIE-models-v0.2.tar.bz2
             ;;
         spacy)
             case $2 in 
                 en|de)
                     echo "Downloading spacy.$2 model..."
-                    python -m spacy."$2".download all
+                    python -m spacy download "$2"
                     echo "Done."
                     ;;
                 *) 
@@ -41,10 +42,10 @@ function download_package {
 
 case ${1} in
     start)
-        python -m rasa_nlu.server "${@:2}" 
+        exec python -m rasa_nlu.server "${@:2}" 
         ;;
     run)
-        "${@:2}"
+        exec "${@:2}"
         ;;
     download)
         download_package ${@:2}

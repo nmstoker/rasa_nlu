@@ -1,10 +1,1 @@
--e .
-git+https://github.com/mit-nlp/MITIE.git#egg=mitie
-spacy==1.2.0
-scikit-learn
-pathlib
-cloudpickle
-boto3
-pytest-pep8
-requests
-progressbar
+-r alt_requirements/requirements_bare.txt
